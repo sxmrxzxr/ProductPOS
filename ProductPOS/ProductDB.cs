@@ -206,7 +206,121 @@ namespace ProductPOS
         {
             TShirt t = (TShirt)null;
 
+            OleDbConnection conn = GetConnection();
+            string selectStatement = "SELECT Product.Type, Procuct.ID, Product.Desc, Product.Price, Product.Qty, Apparel.Color, Apparel.Size, Apparel.Material, TShirt.Size " +
+                                     "FROM (Product INNER JOIN Apparel ON Product.ID = Apparel.ID) INNER JOIN TShirt ON Apparel.ID = TShirt.ID " +
+                                     "WHERE Product.ID = '" + id + "';";
+            OleDbCommand selectCommand = new OleDbCommand(selectStatement, conn);
 
+            try
+            {
+                conn.Open();
+                OleDbDataReader dataReader = selectCommand.ExecuteReader();
+
+                if (dataReader.Read())
+                {
+                    t = new TShirt(dataReader.GetString(0), dataReader.GetString(1), dataReader.GetString(2), dataReader.GetDouble(3), dataReader.GetInt32(4), dataReader.GetString(5), dataReader.GetString(6), dataReader.GetString(7), dataReader.GetString(8));
+                }
+            }
+            catch (OleDbException ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return t;
+        }
+
+        public static DressShirt SelectDressShirt(string id)
+        {
+            DressShirt d = (DressShirt) null;
+
+            OleDbConnection conn = GetConnection();
+            string selectStatement = "SELECT Product.Type, Procuct.ID, Product.Desc, Product.Price, Product.Qty, Apparel.Color, Apparel.Size, Apparel.Material, DressShirt.Neck, DressShirt.Sleeve " +
+                                     "FROM (Product INNER JOIN Apparel ON Product.ID = Apparel.ID) INNER JOIN DressShirt ON Apparel.ID = DressShirt.ID " +
+                                     "WHERE Product.ID = '" + id + "';";
+            OleDbCommand selectCommand = new OleDbCommand(selectStatement, conn);
+
+            try
+            {
+                conn.Open();
+                OleDbDataReader dataReader = selectCommand.ExecuteReader();
+
+                if (dataReader.Read())
+                {
+                    d = new DressShirt(dataReader.GetString(0), dataReader.GetString(1), dataReader.GetString(2), dataReader.GetDouble(3), dataReader.GetInt32(4), dataReader.GetString(5), dataReader.GetString(6), dataReader.GetString(7), dataReader.GetInt32(8), dataReader.GetInt32(9));
+                }
+            }
+            catch (OleDbException ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return d;
+        }
+
+        public static Pants SelectPants(string id)
+        {
+            Pants p = (Pants) null;
+
+            OleDbConnection conn = GetConnection();
+            string selectStatement = "SELECT Product.Type, Procuct.ID, Product.Desc, Product.Price, Product.Qty, Apparel.Color, Apparel.Size, Apparel.Material, Pants.Inseam, Pants.Waist " +
+                                     "FROM (Product INNER JOIN Apparel ON Product.ID = Apparel.ID) INNER JOIN Pants ON Apparel.ID = Pants.ID " +
+                                     "WHERE Product.ID = '" + id + "';";
+            OleDbCommand selectCommand = new OleDbCommand(selectStatement, conn);
+
+            try
+            {
+                conn.Open();
+                OleDbDataReader dataReader = selectCommand.ExecuteReader();
+
+                if (dataReader.Read())
+                {
+                    p = new Pants(dataReader.GetString(0), dataReader.GetString(1), dataReader.GetString(2), dataReader.GetDouble(3), dataReader.GetInt32(4), dataReader.GetString(5), dataReader.GetString(6), dataReader.GetString(7), dataReader.GetInt32(8), dataReader.GetInt32(9));
+                }
+            }
+            catch (OleDbException ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return p;
+        }
+
+        public static Product SelectLikeDesc(string query)
+        {
+            Product p = (Product) null;
+
+            OleDbConnection conn = GetConnection();
+            string selectStatement = "SELECT Type, ID, Desc, Price, Qty " +
+                                     "FROM Product " +
+                                     "WHERE Desc LIKE '%" + query + "%'";
+            OleDbCommand selectCommand = new OleDbCommand(selectStatement, conn);
+
+            try
+            {
+                conn.Open();
+                OleDbDataReader dataReader = selectCommand.ExecuteReader();
+
+                while (dataReader.HasRows)
+                {
+                    while (dataReader.Read())
+                    {
+
+                    }
+                }
+            }
         }
     }
 }
