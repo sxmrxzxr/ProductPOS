@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 
 namespace ProductPOS
 {
-    public abstract class Product
+    public class Product
     {
         private string desc;
         private string id;
         private double price;
         private int qty;
         private string type;
+
+        public Product()
+        {
+
+        }
 
         public Product(string type, string id, string desc, double price, int qty)
         {            
