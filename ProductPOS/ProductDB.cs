@@ -297,7 +297,7 @@ namespace ProductPOS
 
             return p;
         }
-
+        /*
         public static Product SelectLikeDesc(string query)
         {
             Product p = (Product) null;
@@ -321,6 +321,6 @@ namespace ProductPOS
                     }
                 }
             }
-        }
+        }*/
     }
 }
