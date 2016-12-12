@@ -297,10 +297,10 @@ namespace ProductPOS
 
             return p;
         }
-        /*
-        public static Product SelectLikeDesc(string query)
+        
+        public static Product[] SelectLikeDesc(string query)
         {
-            Product p = (Product) null;
+            Product[] p = (Product[]) null;
 
             OleDbConnection conn = GetConnection();
             string selectStatement = "SELECT Type, ID, Desc, Price, Qty " +
@@ -312,15 +312,69 @@ namespace ProductPOS
             {
                 conn.Open();
                 OleDbDataReader dataReader = selectCommand.ExecuteReader();
+                p = new Product[dataReader.FieldCount];
+                int i = 0;
 
-                while (dataReader.HasRows)
+                while (dataReader.Read())
                 {
-                    while (dataReader.Read())
-                    {
-
-                    }
+                    p[i] = new Product(dataReader.GetString(0), dataReader.GetString(1), dataReader.GetString(2), dataReader.GetDouble(3), dataReader.GetInt32(4));
+                    i++;
                 }
             }
-        }*/
+            catch (OleDbException ex) 
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return p;
+        }
+
+        public static int UpdateProduct(string id, int qty)
+        {
+            string updateStatement = "UPDATE Product SET Qty = " + Convert.ToString(qty) + " WHERE ID = '" + id + "';";
+            return ExeNonQuery(updateStatement);
+        }
+
+        public static int InsetLineItem(int tid, string pid, int qty, double price)
+        {
+            string insertString = "INSERT INTO LineItem (TransID, ProductID, Qty, Price) VALUES (" + Convert.ToString(tid) + ", " + pid + ", " + Convert.ToString(qty) + ", " + Convert.ToString(price) + ");";
+            return ExeNonQuery(insertString);
+        }
+
+        public static int InsertTrans(double subtotal, double tax, double total)
+        {
+            string insertString = "INSERT INTO Trans (Subtotal, Tax, Total) VALUES (" + Convert.ToString(subtotal) + ", " + Convert.ToString(tax) + ", " + Convert.ToString(total) + ");";
+            return ExeNonQuery(insertString);
+        }
+
+        public static int SelectMaxTrans()
+        {
+            int num1 = 0;
+            OleDbConnection conn = GetConnection();
+            string selectStatement = "SELECT MAX(ID) FROM Trans;";
+            OleDbCommand selectCommand = new OleDbCommand(selectStatement, conn);
+
+            try
+            {
+                conn.Open();
+                OleDbDataReader dataReader = selectCommand.ExecuteReader();
+                if (dataReader.Read())
+                    num1 = dataReader.GetInt32(0);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+                num1 = -1;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return num1;
+        }
     }
 }
