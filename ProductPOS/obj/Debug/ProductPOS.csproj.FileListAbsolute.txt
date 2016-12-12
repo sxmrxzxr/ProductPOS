@@ -1,2 +1,13 @@
 c:\users\tue95606\documents\visual studio 2015\Projects\ProductPOS\ProductPOS\bin\Debug\ProductPOS.exe.config
 C:\Users\telec\Documents\Visual Studio 2015\Projects\ProductPOS\ProductPOS\bin\Debug\ProductPOS.exe.config
+C:\Users\telec\Documents\Visual Studio 2015\Projects\ProductPOS\ProductPOS\obj\Debug\ProductPOS.csprojResolveAssemblyReference.cache
+C:\Users\telec\Documents\Visual Studio 2015\Projects\ProductPOS\ProductPOS\obj\Debug\ProductPOS.frmMain.resources
+C:\Users\telec\Documents\Visual Studio 2015\Projects\ProductPOS\ProductPOS\obj\Debug\ProductPOS.frmProduct.resources
+C:\Users\telec\Documents\Visual Studio 2015\Projects\ProductPOS\ProductPOS\obj\Debug\ProductPOS.frmSearch.resources
+C:\Users\telec\Documents\Visual Studio 2015\Projects\ProductPOS\ProductPOS\obj\Debug\ProductPOS.Properties.Resources.resources
+C:\Users\telec\Documents\Visual Studio 2015\Projects\ProductPOS\ProductPOS\obj\Debug\ProductPOS.csproj.GenerateResource.Cache
+C:\Users\telec\Documents\Visual Studio 2015\Projects\ProductPOS\ProductPOS\obj\Debug\ProductPOS.exe
+C:\Users\telec\Documents\Visual Studio 2015\Projects\ProductPOS\ProductPOS\obj\Debug\ProductPOS.pdb
+C:\Users\telec\Documents\Visual Studio 2015\Projects\ProductPOS\ProductPOS\bin\Debug\ProductPOS.exe
+C:\Users\telec\Documents\Visual Studio 2015\Projects\ProductPOS\ProductPOS\bin\Debug\ProductPOS.pdb
+C:\Users\telec\Documents\Visual Studio 2015\Projects\ProductPOS\ProductPOS\bin\Debug\ProductDB.accdb

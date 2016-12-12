@@ -84,6 +84,7 @@
             this.btnGetDescription.TabIndex = 4;
             this.btnGetDescription.Text = "Get Description";
             this.btnGetDescription.UseVisualStyleBackColor = true;
+            this.btnGetDescription.Click += new System.EventHandler(this.btnGetDescription_Click);
             // 
             // btnAddProduct
             // 
@@ -93,6 +94,7 @@
             this.btnAddProduct.TabIndex = 5;
             this.btnAddProduct.Text = "Add Product";
             this.btnAddProduct.UseVisualStyleBackColor = true;
+            this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
             // 
             // btnRemoveProduct
             // 
@@ -102,6 +104,7 @@
             this.btnRemoveProduct.TabIndex = 6;
             this.btnRemoveProduct.Text = "Remove Selected Product";
             this.btnRemoveProduct.UseVisualStyleBackColor = true;
+            this.btnRemoveProduct.Click += new System.EventHandler(this.btnRemoveProduct_Click);
             // 
             // btnCancelSale
             // 
@@ -111,6 +114,7 @@
             this.btnCancelSale.TabIndex = 7;
             this.btnCancelSale.Text = "Cancel Sale";
             this.btnCancelSale.UseVisualStyleBackColor = true;
+            this.btnCancelSale.Click += new System.EventHandler(this.btnCancelSale_Click);
             // 
             // btnEnterSale
             // 
@@ -120,6 +124,7 @@
             this.btnEnterSale.TabIndex = 8;
             this.btnEnterSale.Text = "Enter Sale";
             this.btnEnterSale.UseVisualStyleBackColor = true;
+            this.btnEnterSale.Click += new System.EventHandler(this.btnEnterSale_Click);
             // 
             // btnSearchProducts
             // 
@@ -129,6 +134,7 @@
             this.btnSearchProducts.TabIndex = 9;
             this.btnSearchProducts.Text = "Search Products";
             this.btnSearchProducts.UseVisualStyleBackColor = true;
+            this.btnSearchProducts.Click += new System.EventHandler(this.btnSearchProducts_Click);
             // 
             // lstScreen
             // 
@@ -186,6 +192,7 @@
             this.Controls.Add(this.txtProductID);
             this.Name = "frmMain";
             this.Text = "Product POS";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

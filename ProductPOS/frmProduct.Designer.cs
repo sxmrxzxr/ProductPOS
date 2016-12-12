@@ -309,6 +309,7 @@
             this.Controls.Add(this.txtType);
             this.Name = "frmProduct";
             this.Text = "Product";
+            this.Load += new System.EventHandler(this.frmProduct_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

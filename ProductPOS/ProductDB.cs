@@ -13,7 +13,7 @@ namespace ProductPOS
         public static OleDbConnection GetConnection()
         {
             string connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;" +
-                                      "Data Source=|DataDirectory|/ProductDB.accdb;" +
+                                      "Data Source=C:/Users/telec/Documents/Visual Studio 2015/Projects/ProductPOS/ProductPOS/ProductDB.accdb;" +
                                       "Persist Security Info=True";
             OleDbConnection connection = new OleDbConnection(connectionString);
             return connection;
@@ -31,10 +31,10 @@ namespace ProductPOS
                 connection.Open();
                 resultVal = command.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (OleDbException ex)
             {
                 resultVal = -1;
-                throw ex;
+                System.Windows.Forms.MessageBox.Show(ex.ToString());//throw ex;
             }
             finally
             {
@@ -48,7 +48,7 @@ namespace ProductPOS
             Product p = (Product) null;
 
             OleDbConnection conn = GetConnection();
-            string selectStatement = "SELECT ID, Desc, Price, Qty, Type FROM Product WHERE ID = '" + id + "';";
+            string selectStatement = "SELECT Type, ID, Desc, Price, Qty FROM Product WHERE ID = '" + id + "';";
             OleDbCommand selectCommand = new OleDbCommand(selectStatement, conn);
 
             try
@@ -302,7 +302,7 @@ namespace ProductPOS
         {
             Product[] p = (Product[]) null;
 
-            OleDbConnection conn = GetConnection();
+            OleDbConnection conn = ProductDB.GetConnection();
             string selectStatement = "SELECT Type, ID, Desc, Price, Qty " +
                                      "FROM Product " +
                                      "WHERE Desc LIKE '%" + query + "%'";
@@ -339,7 +339,7 @@ namespace ProductPOS
             return ExeNonQuery(updateStatement);
         }
 
-        public static int InsetLineItem(int tid, string pid, int qty, double price)
+        public static int InsertLineItem(int tid, string pid, int qty, double price)
         {
             string insertString = "INSERT INTO LineItem (TransID, ProductID, Qty, Price) VALUES (" + Convert.ToString(tid) + ", " + pid + ", " + Convert.ToString(qty) + ", " + Convert.ToString(price) + ");";
             return ExeNonQuery(insertString);

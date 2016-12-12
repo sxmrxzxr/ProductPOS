@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ProductRWRizerS;
+//using ProductRWRizerS;
 using System.IO;
 
 namespace ProductPOS
@@ -15,7 +15,7 @@ namespace ProductPOS
 
         }
 
-        public new void AddProduct(Product p)
+        public void AddProduct(Product p)
         {
             this.Add(p);
         }
@@ -43,7 +43,7 @@ namespace ProductPOS
                             this.AddProduct(new TShirt(values[0], values[1], values[2], Convert.ToDouble(values[3]), Convert.ToInt32(values[4]), values[5], values[6], values[7], values[8]));
                             break;
                         case "Software":
-                            this.AddProduct(new Software(values[0], values[1], Convert.ToDouble(values[2]), Convert.ToInt32(values[3]), values[4], Convert.ToDateTime(values[5]), Convert.ToInt32(values[6]), Convert.ToInt32(values[7]), values[8], values[9]));
+                            this.AddProduct(new Software(values[0], values[1], values[2], Convert.ToDouble(values[3]), Convert.ToInt32(values[4]), Convert.ToDateTime(values[5]), Convert.ToInt32(values[6]), Convert.ToInt32(values[7]), values[8], values[9]));
                             break;
                         case "Movie":
                             this.AddProduct(new Movie(values[0], values[1], values[2], Convert.ToDouble(values[3]), Convert.ToInt32(values[4]), Convert.ToDateTime(values[5]), Convert.ToInt32(values[6]), Convert.ToInt32(values[7]), values[8], TimeSpan.Parse(values[9]), values[10], values[11]));
@@ -56,7 +56,7 @@ namespace ProductPOS
             }
             catch (FileNotFoundException f)
             {
-                
+                System.Windows.Forms.MessageBox.Show(f.ToString());
             }            
         }
 
