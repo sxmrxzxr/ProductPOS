@@ -34,7 +34,7 @@ namespace ProductPOS
             catch (OleDbException ex)
             {
                 resultVal = -1;
-                System.Windows.Forms.MessageBox.Show(ex.ToString());//throw ex;
+                //System.Windows.Forms.MessageBox.Show(ex.ToString());//throw ex;
             }
             finally
             {
@@ -78,7 +78,7 @@ namespace ProductPOS
             Movie m = (Movie) null;
 
             OleDbConnection conn = GetConnection();
-            string selectStatement = "SELECT Product.Type, Procuct.ID, Product.Desc, Product.Price, Product.Qty, Media.ReleaseDate, Disk.NumDisks, Disk.Size, Disk.TypeDisk, Entertainment.RunTime, Movie.Director, Movie.Producer " + 
+            string selectStatement = "SELECT Product.Type, Product.ID, Product.Desc, Product.Price, Product.Qty, Media.ReleaseDate, Disk.SizeDisk, Disk.NumDisks, Disk.TypeDisk, Entertainment.Hours, Entertainment.Minutes, Entertainment.Seconds, Movie.Director, Movie.Producer " + 
                                      "FROM (((Product INNER JOIN Media ON Product.ID = Media.ID) INNER JOIN Disk ON Media.ID = Disk.ID) INNER JOIN Entertainment ON Disk.ID = Entertainment.ID) INNER JOIN Movie ON Entertainment.ID = Movie.ID " + 
                                      "WHERE Product.ID = '" + id + "';";
             OleDbCommand selectCommand = new OleDbCommand(selectStatement, conn);
@@ -90,7 +90,18 @@ namespace ProductPOS
 
                 if (dataReader.Read())
                 {
-                    m = new Movie(dataReader.GetString(0), dataReader.GetString(1), dataReader.GetString(2), dataReader.GetDouble(3), dataReader.GetInt32(4), dataReader.GetDateTime(5), dataReader.GetInt32(6), dataReader.GetInt32(7), dataReader.GetString(8), dataReader.GetTimeSpan(9), dataReader.GetString(10), dataReader.GetString(12));
+                    m = new Movie(dataReader.GetString(0), 
+                                  dataReader.GetString(1), 
+                                  dataReader.GetString(2), 
+                                  dataReader.GetDouble(3), 
+                                  dataReader.GetInt32(4), 
+                                  dataReader.GetDateTime(5), 
+                                  dataReader.GetInt32(6), 
+                                  dataReader.GetInt32(7), 
+                                  dataReader.GetString(8), 
+                                  TimeSpan.Parse(dataReader.GetInt32(9).ToString() + ":" + dataReader.GetInt32(10).ToString() + ":" + dataReader.GetInt32(11).ToString()), 
+                                  dataReader.GetString(12), 
+                                  dataReader.GetString(13));
                 }
             }
             catch (OleDbException ex)
@@ -111,7 +122,7 @@ namespace ProductPOS
             Music m = (Music)null;
 
             OleDbConnection conn = GetConnection();
-            string selectStatement = "SELECT Product.Type, Procuct.ID, Product.Desc, Product.Price, Product.Qty, Media.ReleaseDate, Disk.NumDisks, Disk.Size, Disk.TypeDisk, Entertainment.RunTime, Music.Artist, Music.Genre, Music.Label " +
+            string selectStatement = "SELECT Product.Type, Product.ID, Product.Desc, Product.Price, Product.Qty, Media.ReleaseDate, Disk.SizeDisk, Disk.NumDisks, Disk.TypeDisk, Entertainment.Hours, Entertainment.Minutes, Entertainment.Seconds, Music.Artist, Music.Genre, Music.Label " +
                                      "FROM (((Product INNER JOIN Media ON Product.ID = Media.ID) INNER JOIN Disk ON Media.ID = Disk.ID) INNER JOIN Entertainment ON Disk.ID = Entertainment.ID) INNER JOIN Music ON Entertainment.ID = Music.ID " +
                                      "WHERE Product.ID = '" + id + "';";
             OleDbCommand selectCommand = new OleDbCommand(selectStatement, conn);
@@ -123,7 +134,19 @@ namespace ProductPOS
 
                 if (dataReader.Read())
                 {
-                    m = new Music(dataReader.GetString(0), dataReader.GetString(1), dataReader.GetString(2), dataReader.GetDouble(3), dataReader.GetInt32(4), dataReader.GetDateTime(5), dataReader.GetInt32(6), dataReader.GetInt32(7), dataReader.GetString(8), dataReader.GetTimeSpan(9), dataReader.GetString(10), dataReader.GetString(12), dataReader.GetString(13));
+                    m = new Music(dataReader.GetString(0), 
+                                  dataReader.GetString(1), 
+                                  dataReader.GetString(2), 
+                                  dataReader.GetDouble(3), 
+                                  dataReader.GetInt32(4), 
+                                  dataReader.GetDateTime(5), 
+                                  dataReader.GetInt32(6), 
+                                  dataReader.GetInt32(7), 
+                                  dataReader.GetString(8),
+                                  TimeSpan.Parse(dataReader.GetInt32(9).ToString() + ":" + dataReader.GetInt32(10).ToString() + ":" + dataReader.GetInt32(11).ToString()), 
+                                  dataReader.GetString(12), 
+                                  dataReader.GetString(13),
+                                  dataReader.GetString(14));
                 }
             }
             catch (OleDbException ex)
@@ -143,7 +166,7 @@ namespace ProductPOS
             Software s = (Software) null;
 
             OleDbConnection conn = GetConnection();
-            string selectStatement = "SELECT Product.Type, Procuct.ID, Product.Desc, Product.Price, Product.Qty, Media.ReleaseDate, Disk.NumDisks, Disk.Size, Disk.TypeDisk, Software.TypeSoft " +
+            string selectStatement = "SELECT Product.Type, Product.ID, Product.Desc, Product.Price, Product.Qty, Media.ReleaseDate, Disk.SizeDisk, Disk.NumDisks, Disk.TypeDisk, Software.TypeSoft " +
                                      "FROM ((Product INNER JOIN Media ON Product.ID = Media.ID) INNER JOIN Disk ON Media.ID = Disk.ID) INNER JOIN Software ON Disk.ID = Software.ID " +
                                      "WHERE Product.ID = '" + id + "';";
             OleDbCommand selectCommand = new OleDbCommand(selectStatement, conn);
@@ -175,7 +198,7 @@ namespace ProductPOS
             Book b = (Book) null;
 
             OleDbConnection conn = GetConnection();
-            string selectStatement = "SELECT Product.Type, Procuct.ID, Product.Desc, Product.Price, Product.Qty, Media.ReleaseDate, Book.Author, Book.NumPages, Book.Publisher " +
+            string selectStatement = "SELECT Product.Type, Product.ID, Product.Desc, Product.Price, Product.Qty, Media.ReleaseDate, Book.Author, Book.NumPages, Book.Publisher " +
                                      "FROM (Product INNER JOIN Media ON Product.ID = Media.ID) INNER JOIN Book ON Media.ID = Book.ID " +
                                      "WHERE Product.ID = '" + id + "';";
             OleDbCommand selectCommand = new OleDbCommand(selectStatement, conn);
@@ -207,7 +230,7 @@ namespace ProductPOS
             TShirt t = (TShirt)null;
 
             OleDbConnection conn = GetConnection();
-            string selectStatement = "SELECT Product.Type, Procuct.ID, Product.Desc, Product.Price, Product.Qty, Apparel.Color, Apparel.Size, Apparel.Material, TShirt.Size " +
+            string selectStatement = "SELECT Product.Type, Product.ID, Product.Desc, Product.Price, Product.Qty,  Apparel.Material, Apparel.Color, Apparel.Manufacturer, TShirt.[SizeT] " +
                                      "FROM (Product INNER JOIN Apparel ON Product.ID = Apparel.ID) INNER JOIN TShirt ON Apparel.ID = TShirt.ID " +
                                      "WHERE Product.ID = '" + id + "';";
             OleDbCommand selectCommand = new OleDbCommand(selectStatement, conn);
@@ -239,7 +262,7 @@ namespace ProductPOS
             DressShirt d = (DressShirt) null;
 
             OleDbConnection conn = GetConnection();
-            string selectStatement = "SELECT Product.Type, Procuct.ID, Product.Desc, Product.Price, Product.Qty, Apparel.Color, Apparel.Size, Apparel.Material, DressShirt.Neck, DressShirt.Sleeve " +
+            string selectStatement = "SELECT Product.Type, Product.ID, Product.Desc, Product.Price, Product.Qty, Apparel.Material, Apparel.Color, Apparel.Manufacturer, DressShirt.Neck, DressShirt.Sleeve " +
                                      "FROM (Product INNER JOIN Apparel ON Product.ID = Apparel.ID) INNER JOIN DressShirt ON Apparel.ID = DressShirt.ID " +
                                      "WHERE Product.ID = '" + id + "';";
             OleDbCommand selectCommand = new OleDbCommand(selectStatement, conn);
@@ -271,7 +294,7 @@ namespace ProductPOS
             Pants p = (Pants) null;
 
             OleDbConnection conn = GetConnection();
-            string selectStatement = "SELECT Product.Type, Procuct.ID, Product.Desc, Product.Price, Product.Qty, Apparel.Color, Apparel.Size, Apparel.Material, Pants.Inseam, Pants.Waist " +
+            string selectStatement = "SELECT Product.Type, Product.ID, Product.Desc, Product.Price, Product.Qty, Apparel.Material, Apparel.Color, Apparel.Manufacturer, Pants.Inseam, Pants.Waist " +
                                      "FROM (Product INNER JOIN Apparel ON Product.ID = Apparel.ID) INNER JOIN Pants ON Apparel.ID = Pants.ID " +
                                      "WHERE Product.ID = '" + id + "';";
             OleDbCommand selectCommand = new OleDbCommand(selectStatement, conn);

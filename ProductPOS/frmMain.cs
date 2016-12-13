@@ -41,9 +41,12 @@ namespace ProductPOS
             Product p1 = (Product)null;
             Product p2 = ProductDB.SelectProduct(txtProductID.Text);
 
+            //MessageBox.Show(Convert.ToString(p2.Type == "Pants"));
+            //MessageBox.Show(Convert.ToString(p2 != null));
+
             if (p2 != null)
             {
-                int n = (int)MessageBox.Show("Product: " + p2.ToString());
+                //int n = (int)MessageBox.Show("Product: " + p2.ToString());
 
                 if (p2.Type == "Movie")
                     p1 = (Product)ProductDB.SelectMovie(p2.ID);
@@ -59,6 +62,8 @@ namespace ProductPOS
                     p1 = (Product)ProductDB.SelectTShirt(p2.ID);
                 if (p2.Type == "Book")
                     p1 = (Product)ProductDB.SelectBook(p2.ID);
+
+                //MessageBox.Show(p1.ToString());
             }
             if (p1 != null)
             {
